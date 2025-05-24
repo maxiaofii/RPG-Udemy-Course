@@ -16,9 +16,9 @@ public class Player : Entity
     public float dashSpeed;
     public float dashDUration;
     public float dashDir { get; private set; }
-    [SerializeField] private float dashCooldown;
-    private float dashUsageTimer;
-    
+
+    public  SkillManager skill;
+
     #region State
     public PlayerStateMachine playerStateMachine { get; private set; }
     public PlayerIdleState idleState { get; private set; }
@@ -45,10 +45,12 @@ public class Player : Entity
         wallJump = new PlayerWallJumpState(this, playerStateMachine, "Jump");
         primaryAttack = new PlayerPrimaryAttackState(this, playerStateMachine, "Attack");
         counterAttack =  new PlayerCounterAttackState(this, playerStateMachine, "CounterAttack");
+
     }
     protected override void Start()
     {
         base.Start();
+        skill = SkillManager.instance;
         playerStateMachine.Initialize(idleState);
     }
 
@@ -82,10 +84,8 @@ public class Player : Entity
         //}
         if (playerStateMachine.currentState == wallSlideState)
             return;
-        dashUsageTimer -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.LeftShift)&&dashUsageTimer<0)
+        if (Input.GetKeyDown(KeyCode.LeftShift)&&SkillManager.instance.dash.CanUseSkill())
         {
-            dashUsageTimer = dashCooldown;
             dashDir = Input.GetAxisRaw("Horizontal");
             if(dashDir == 0)
                 dashDir = facingDir;
