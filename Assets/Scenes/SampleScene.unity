@@ -4434,7 +4434,7 @@ Transform:
   m_GameObject: {fileID: 1829421517}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.95, y: -0.17, z: 0}
+  m_LocalPosition: {x: 0.5, y: -0.17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4465,7 +4465,7 @@ Transform:
   m_GameObject: {fileID: 1865810497}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.97, y: 0.08, z: 0}
+  m_LocalPosition: {x: 0.37, y: -0.16, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4483,6 +4483,7 @@ GameObject:
   - component: {fileID: 1985876767}
   - component: {fileID: 1985876768}
   - component: {fileID: 1985876769}
+  - component: {fileID: 1985876770}
   m_Layer: 7
   m_Name: Enemy_Skeleton
   m_TagString: Untagged
@@ -4521,8 +4522,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e202f65bb7e8d4684324c2c3d2db5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockbackDirection: {x: 6, y: 2}
+  knockbackDuration: 0.07
   attackCheck: {fileID: 1829421518}
-  attackCheckRadius: 1.11
+  attackCheckRadius: 1.26
   groundCheck: {fileID: 1522601329}
   groundCheckDistance: 0.38
   wallCheck: {fileID: 139746831}
@@ -4530,6 +4533,8 @@ MonoBehaviour:
   whatisGround:
     serializedVersion: 2
     m_Bits: 8
+  stunDuration: 1
+  stunDirection: {x: 7, y: 7}
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
@@ -4602,6 +4607,21 @@ CapsuleCollider2D:
   m_Offset: {x: 0.004481733, y: -0.24645686}
   m_Size: {x: 0.84952223, y: 1.7438517}
   m_Direction: 0
+--- !u!114 &1985876770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985876763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae48333d0cb0ba54f8b2f30391cc735f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitMat: {fileID: 2100000, guid: 3c8c5d837cf687a4fa69b8d376a27626, type: 2}
+  flashDuration: 0.2
+  originalMat: {fileID: 0}
 --- !u!1 &2033571926
 GameObject:
   m_ObjectHideFlags: 0
@@ -4614,6 +4634,7 @@ GameObject:
   - component: {fileID: 2033571927}
   - component: {fileID: 2033571930}
   - component: {fileID: 2033571929}
+  - component: {fileID: 2033571931}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -4633,8 +4654,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d919ed0a1d83ec44a9ffc492d5a8a559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knockbackDirection: {x: 5, y: 2}
+  knockbackDuration: 0.07
   attackCheck: {fileID: 1865810498}
-  attackCheckRadius: 1.03
+  attackCheckRadius: 1.31
   groundCheck: {fileID: 1229944781}
   groundCheckDistance: 0.26
   wallCheck: {fileID: 867143292}
@@ -4643,9 +4666,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   attackMovement:
-  - {x: 3, y: 1}
-  - {x: 4, y: 2}
-  - {x: 5, y: 3.5}
+  - {x: 1, y: 1}
+  - {x: 0, y: 2}
+  - {x: 1.5, y: 3}
   movespeed: 10
   jumpForce: 15
   dashSpeed: 25
@@ -4732,6 +4755,21 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &2033571931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033571926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae48333d0cb0ba54f8b2f30391cc735f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitMat: {fileID: 2100000, guid: 3c8c5d837cf687a4fa69b8d376a27626, type: 2}
+  flashDuration: 0.2
+  originalMat: {fileID: 0}
 --- !u!1 &2135080290
 GameObject:
   m_ObjectHideFlags: 0

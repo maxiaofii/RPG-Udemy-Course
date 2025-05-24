@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    [Header("Attack info")]
+    [Header("Attack details")]
     public Vector2[] attackMovement;
-    
+    public float counterAttackDuraion;
     public bool isBusy {  get; private set; }
     [Header("Move info")]
     public float movespeed=9;
@@ -29,6 +29,7 @@ public class Player : Entity
     public PlayerWallSlideState wallSlideState { get; private set; }
     public PlayerWallJumpState wallJump { get; private set; }
     public PlayerPrimaryAttackState primaryAttack { get; private set; }
+    public PlayerCounterAttackState counterAttack { get; private set; }
     #endregion
     // Start is called before the first frame update
     protected override void Awake()
@@ -43,6 +44,7 @@ public class Player : Entity
         wallSlideState = new PlayerWallSlideState(this, playerStateMachine, "WallSlide");
         wallJump = new PlayerWallJumpState(this, playerStateMachine, "Jump");
         primaryAttack = new PlayerPrimaryAttackState(this, playerStateMachine, "Attack");
+        counterAttack =  new PlayerCounterAttackState(this, playerStateMachine, "CounterAttack");
     }
     protected override void Start()
     {

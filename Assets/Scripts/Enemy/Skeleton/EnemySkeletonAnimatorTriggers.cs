@@ -5,11 +5,11 @@ using UnityEngine;
 public class Enemy_SkeletonAnimatorTriggers : MonoBehaviour
 {
     private Enemy_Skeleton enemy=>GetComponentInParent<Enemy_Skeleton>();
-    private void AnimationTrigger()
+    public void AnimationTrigger()
     {
         enemy.AnimationFinishTrigger();
     }
-    private void AttackTrigger()
+    public void AttackTrigger()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(enemy.attackCheck.position, enemy.attackCheckRadius);
         foreach (var hit in colliders)
@@ -20,4 +20,6 @@ public class Enemy_SkeletonAnimatorTriggers : MonoBehaviour
             }
         }
     }
+    public void OpenCounterWindow()=>enemy.OpenCounterAttackWindow();
+    public void CloseCounterWindow() => enemy.CloseCounterAttackWindow();
 }
